@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Student Forum{% endblock %}
+
+{% block content %}
+  <h1>Threads</h1>
+  <a href="{{ url_for('new_thread') }}" class="btn btn-primary mb-3">Create New Thread</a>
+  {% for thread in threads %}
+    <div class="card mb-2">
+      <div class="card-body">
+        <h5 class="card-title"><a href="{{ url_for('thread', thread_id=thread.id) }}">{{ thread.title }}</a></h5>
+        <p class="card-text">By {{ thread.author.username }} at {{ thread.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+      </div>
+    </div>
+  {% else %}
+    <p>No threads yet.</p>
+  {% endfor %}
+{% endblock %}
